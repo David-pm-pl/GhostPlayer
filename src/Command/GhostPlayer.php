@@ -4,7 +4,6 @@ namespace davidglitch04\GhostPlayer\Command;
 
 use davidglitch04\GhostPlayer\Loader;
 use muqsit\fakeplayer\info\FakePlayerInfoBuilder;
-use muqsit\fakeplayer\Loader as FakeplayerLoader;
 use muqsit\fakeplayer\network\FakePlayerNetworkSession;
 use muqsit\fakeplayer\network\listener\ClosureFakePlayerPacketListener;
 use pocketmine\command\Command;
@@ -50,7 +49,7 @@ class GhostPlayer extends Command implements PluginOwned {
                 return;
             } else{
                 $plugin = Server::getInstance()->getPluginManager()->getPlugin("FakePlayer");
-                if($plugin instanceof FakeplayerLoader){
+                if($plugin !== null){
                     $plugin->addPlayer(FakePlayerInfoBuilder::create()
                         ->setUsername($args[1])
                         ->setXuid("ghostplayerxuid")
