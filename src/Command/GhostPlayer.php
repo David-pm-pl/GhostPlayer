@@ -57,7 +57,6 @@ class GhostPlayer extends Command implements PluginOwned {
                         ->setUuid($this->ghostplayer->getUuid())
                         ->setSkin($player->getSkin())
                     ->build());
-                    }
                     $sender->sendMessage("Create GhostPlayer Success!");
                 }
             }
