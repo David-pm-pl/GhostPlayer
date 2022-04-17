@@ -24,7 +24,7 @@ class Loader extends PluginBase{
         }
     }
 
-    public function getUuid(){
+    public function getUuid(): string{
         return Uuid::uuid4();
     }
 }

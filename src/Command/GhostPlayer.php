@@ -28,7 +28,7 @@ class GhostPlayer extends Command implements PluginOwned {
         return $this->ghostplayer;
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args)
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if ($this->testPermission($sender, "ghostplayer.command.allow")){
             $uuid = $this->ghostplayer->getUuid();
