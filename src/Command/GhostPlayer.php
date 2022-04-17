@@ -5,15 +5,9 @@ namespace davidglitch04\GhostPlayer\Command;
 use davidglitch04\GhostPlayer\Loader;
 use muqsit\fakeplayer\info\FakePlayerInfoBuilder;
 use muqsit\fakeplayer\Loader as FakeplayerLoader;
-use muqsit\fakeplayer\network\FakePlayerNetworkSession;
-use muqsit\fakeplayer\network\listener\ClosureFakePlayerPacketListener;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\lang\Language;
-use pocketmine\network\mcpe\NetworkSession;
-use pocketmine\network\mcpe\protocol\ClientboundPacket;
-use pocketmine\network\mcpe\protocol\TextPacket;
-use pocketmine\player\Player;
+use pocketmine\entity\Skin;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 use pocketmine\Server;
@@ -37,29 +31,55 @@ class GhostPlayer extends Command implements PluginOwned {
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if ($this->testPermission($sender, "ghostplayer.command.allow")){
+            $uuid = $this->ghostplayer->getUuid();
             if (!isset($args[1])){
-                $sender->sendMessage("Usage: /ghostplayer <player: skin> <string: name>");
+                $sender->sendMessage("Usage: /ghostplayer <spawn/player: skin> <random/string: name>");
                 return;
             }
-            $player = Server::getInstance()->getPlayerByPrefix($args[0]);
-            if ($player == null){
-                $sender->sendMessage("Player skin not found!");
-                return;
-            } elseif (Server::getInstance()->getPlayerByPrefix($args[1]) !== null){
-                $sender->sendMessage("There are already players with this name!");
-                return;
+            if ($args[0] == "spawn" or $args[0] == "s"){
+                if ($args[1] == "random" or $args[1] == "r"){
+                    $username = $this->randomUserName();
+                    $skin_data = stream_get_contents($this->ghostplayer->getResource("skin.rgba"));
+                    $skin = new Skin("Standard_Custom", $skin_data);
+                    GhostPlayer::SpawnPlayer($username, $uuid, $skin);
+                    $sender->sendMessage("Create GhostPlayer Success!");
+                }
             } else{
-                $plugin = Server::getInstance()->getPluginManager()->getPlugin("FakePlayer");
-                if($plugin instanceof FakeplayerLoader){
-                    $plugin->addPlayer(FakePlayerInfoBuilder::create()
-                        ->setUsername($args[1])
-                        ->setXuid("ghostplayerxuid")
-                        ->setUuid($this->ghostplayer->getUuid())
-                        ->setSkin($player->getSkin())
-                    ->build());
+                $player = Server::getInstance()->getPlayerByPrefix($args[0]);
+                if ($player == null){
+                    $sender->sendMessage("Player skin not found!");
+                    return;
+                } elseif (Server::getInstance()->getPlayerByPrefix($args[1]) !== null){
+                    $sender->sendMessage("There are already players with this name!");
+                    return;
+                } else{
+                    GhostPlayer::SpawnPlayer($args[1], $uuid, $player->getSkin());
                     $sender->sendMessage("Create GhostPlayer Success!");
                 }
             }
+        }
+    }
+
+    private static function SpawnPlayer(string $username, $uuid, Skin $skin): void{
+        $plugin = Server::getInstance()->getPluginManager()->getPlugin("FakePlayer");
+        if($plugin instanceof FakeplayerLoader){
+            $plugin->addPlayer(FakePlayerInfoBuilder::create()
+                ->setUsername($username)
+                ->setXuid("ghostplayerxuid")
+                ->setUuid($uuid)
+                ->setSkin($skin)
+            ->build());
+        }
+    }
+
+    private function randomUserName(): string{
+        {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randstring = '';
+            for ($i = 0; $i < 8; $i++) {
+                $randstring .= $characters[rand(0, strlen($characters) - 1)];
+            }
+            return $randstring;
         }
     }
 }
