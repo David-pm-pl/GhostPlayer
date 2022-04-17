@@ -46,7 +46,7 @@ class GhostPlayer extends Command implements PluginOwned {
                 $sender->sendMessage("Player skin not found!");
                 return;
             } elseif (Server::getInstance()->getPlayerByPrefix($args[1]) !== null){
-                $sender->sendMessage("Have player with this name!");
+                $sender->sendMessage("There are already players with this name!");
                 return;
             } else{
                 $plugin = Server::getInstance()->getPluginManager()->getPlugin("FakePlayer");
@@ -57,42 +57,6 @@ class GhostPlayer extends Command implements PluginOwned {
                         ->setUuid($this->ghostplayer->getUuid())
                         ->setSkin($player->getSkin())
                     ->build());
-                    $session = Server::getInstance()->getPlayerByPrefix($args[1])->getNetworkSession();
-                    if($session instanceof FakePlayerNetworkSession){
-                        $session->registerSpecificPacketListener(TextPacket::class, new ClosureFakePlayerPacketListener(
-                            function(ClientboundPacket $packet, NetworkSession $session) use ($player) : void{
-                                $type = "unknown";
-                                switch ($packet->type){
-                                    case TextPacket::TYPE_RAW:
-                                        $type = "Raw";
-                                        break;
-                                    case TextPacket::TYPE_CHAT:
-                                        $type = "Chat";
-                                        break;
-                                    case TextPacket::TYPE_TRANSLATION:
-                                        $type = "Translation";
-                                        break;
-                                    case TextPacket::TYPE_POPUP:
-                                        $type = "Popup";
-                                        break;
-                                    case TextPacket::TYPE_JUKEBOX_POPUP:
-                                        $type = "JukeBox Popup";
-                                        break;
-                                    case TextPacket::TYPE_TIP:
-                                        $type = "Tip";
-                                        break;
-                                    case TextPacket::TYPE_SYSTEM:
-                                        $type = "System";
-                                        break;
-                                    case TextPacket::TYPE_WHISPER:
-                                        $type = "Whisper";
-                                        break;
-                                    case TextPacket::TYPE_ANNOUNCEMENT:
-                                        $type = "Announcement";
-                                        break;
-                                }
-                            // TODO:
-                        }));
                     }
                     $sender->sendMessage("Create GhostPlayer Success!");
                 }
