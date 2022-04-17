@@ -6,4 +6,5 @@ projects:
   GhostPlayer:
     path: ""
     icon: icon.png
+    lint: false
 ...
