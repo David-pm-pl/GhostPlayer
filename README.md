@@ -13,7 +13,7 @@
 
 | **Command** | **Description** |
 | --- | --- |
-| **/ghostplayer ** | **GhostPlayer control command** |
+| **/ghostplayer** | **GhostPlayer control command** |
 
 # Contacts
 **You can contact me directly through the platforms listed below**
