@@ -3,7 +3,7 @@
 namespace davidglitch04\GhostPlayer;
 
 use davidglitch04\GhostPlayer\Command\GhostPlayer;
-use muqsit\fakeplayer\Loader as FakeplayerLoader;
+use muqsit\fakeplayer\Loader;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use Ramsey\Uuid\Uuid;
@@ -18,7 +18,7 @@ class Loader extends PluginBase{
 
     protected function initDepends(): void{
         $fakeplayer = Server::getInstance()->getPluginManager()->getPlugin("FakePlayer");
-        if(!$fakeplayer instanceof FakeplayerLoader){
+        if($fakeplayer == null){
             Server::getInstance()->getPluginManager()->disablePlugin($this);
             $this->getLogger()->notice("You need download plugin FakePlayer at https://github.com/Muqsit/FakePlayer");
         }
