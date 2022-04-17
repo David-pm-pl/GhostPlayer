@@ -5,8 +5,7 @@ main: davidglitch04\GhostPlayer\Loader
 src-namespace-prefix: davidglitch04\GhostPlayer
 author: DavidGlitch04
 website: https://github.com/DavidGlitch04
-softdepend:
-  - FakePlayer
+softdepend: FakePlayer
 
 permissions:
   ghostplayer.command.allow:
