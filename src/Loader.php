@@ -3,7 +3,6 @@
 namespace davidglitch04\GhostPlayer;
 
 use davidglitch04\GhostPlayer\Command\GhostPlayer;
-use muqsit\fakeplayer\Loader;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use Ramsey\Uuid\Uuid;
