@@ -6,6 +6,6 @@ projects:
   GhostPlayer:
     path: ""
     icon: icon.png
-    lint:
-      phpstan: false
+#    lint:
+#      phpstan: false
 ...
