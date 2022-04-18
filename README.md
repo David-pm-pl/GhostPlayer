@@ -14,6 +14,11 @@
 | **Command** | **Description** |
 | --- | --- |
 | **/ghostplayer** | **GhostPlayer control command** |
+ 
+## TODO
+ - [ ] Using PathFinding
+ - [ ] Ghostplayer control (Hitting, Digging,...)
+ - [ ] Many more
 
 # Contacts
 **You can contact me directly through the platforms listed below**
