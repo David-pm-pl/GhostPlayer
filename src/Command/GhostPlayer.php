@@ -60,7 +60,7 @@ class GhostPlayer extends Command implements PluginOwned {
         }
     }
 
-    private static function SpawnPlayer(string $username, $uuid, Skin $skin): void{
+    private static function SpawnPlayer(string $username, string $uuid, Skin $skin): void{
         $plugin = Server::getInstance()->getPluginManager()->getPlugin("FakePlayer");
         if($plugin instanceof FakeplayerLoader){
             $plugin->addPlayer(FakePlayerInfoBuilder::create()
