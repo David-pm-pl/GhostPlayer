@@ -4,7 +4,11 @@
    "type": "project",
    "require": {
         "php": "^8.0",
-        "muqsit/fakeplayer": "dev-master"
+        "muqsit/fakeplayer": "dev-master",
+         "phpstan/phpstan": "^1.4.6",
+         "pocketmine/pocketmine-mp": "^4.0.0",
+         "phpstan/phpstan-strict-rules": "^1.0",
+         "phpstan/extension-installer": "^1.0"
     },
    "keywords": [
       "ghostplayer",
@@ -34,12 +38,6 @@
          "url": "https://www.patreon.com/Ericpmpl"
       }
    ],
-   "require": {
-      "phpstan/phpstan": "^1.4.6",
-      "pocketmine/pocketmine-mp": "^4.0.0",
-      "phpstan/phpstan-strict-rules": "^1.0",
-      "phpstan/extension-installer": "^1.0"
-   },
    "autoload": {
       "psr-0": {
          "": "../src"
