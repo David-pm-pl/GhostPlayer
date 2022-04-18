@@ -7,7 +7,7 @@ projects:
     path: ""
     icon: icon.png
     libs:
-    - src: muqsit/fakeplayer/FakePlayer
+    - src: muqsit/fakeplayer/fakeplayer
       version: ^0.1.4
     lint:
       phpstan: false
